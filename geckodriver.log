@@ -1,0 +1,18 @@
+1673163600671	geckodriver	INFO	Listening on 127.0.0.1:53342
+1673163600948	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "--remote-debugging-port" "53343" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/0v/2pyy39f56f7gvh9m91gkslm40000gn/T/rust_mozprofileDa40j0"
+2023-01-08 02:40:33.624 firefox-bin[68584:3598937] Unable to install helper!
+WebDriver BiDi listening on ws://127.0.0.1:53343
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+DevTools listening on ws://127.0.0.1:53343/devtools/browser/8fd59e3a-4df5-4a81-b322-b84b0d698261
+1673163691464	geckodriver	INFO	Listening on 127.0.0.1:53419
+1673163691983	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "--remote-debugging-port" "53420" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/0v/2pyy39f56f7gvh9m91gkslm40000gn/T/rust_mozprofiledT6rAZ"
+1673163692324	Marionette	INFO	Marionette enabled
+1673163692347	Marionette	INFO	Listening on port 53427
+Read port: 53427
+WebDriver BiDi listening on ws://127.0.0.1:53420
+1673163692472	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/0v/2pyy39f56f7gvh9m91gkslm40000gn/T/rust_mozprofiledT6rAZ/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:53420/devtools/browser/96d6f2a0-97f1-45fd-8266-56c5aa2fc224
+JavaScript error: resource://gre/modules/URIFixup.sys.mjs, line 302: NS_ERROR_FAILURE: Should pass a non-null uri
+JavaScript error: chrome://browser/content/browser.js, line 4846: TypeError: gBrowser is undefined
