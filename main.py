@@ -30,7 +30,7 @@ except:
 class OpenAi:
     def __init__(self):
         self.model_engine = "text-davinci-003"
-        openai.api_key = config_vars["OPENAI_API_KEY"]
+        openai.api_key = os.environ.get("OPENAI_API_KEY")
 
     def get_completion_with_prompt(self, prompt):
         character_prompts = openai.Completion.create(
@@ -44,11 +44,11 @@ class OpenAi:
         return character_prompts.choices[0].text
     
     def get_character_prompt(self):
-        return self.get_completion_with_prompt(config_vars['ALTERNATIVE_PROMPT_STYLE'])
+        return self.get_completion_with_prompt(os.environ.get("ALTERNATIVE_PROMPT_STYLE"))
         #return self.get_completion_with_prompt(config_vars['CHARACTER_PROMPT'])
         
     def get_character_backstory(self, character_description):
-        return self.get_completion_with_prompt(config_vars['BACKSTORY_PROMPT'] + character_description)
+        return self.get_completion_with_prompt(os.environ.get("BACKSTORY_PROMPT") + character_description)
     
     def get_full_prompt_with_details(self):
         prompt = "Write a detailed description of " + self.get_character_backstory(self.get_character_prompt()) + " What does it look like?"
@@ -93,7 +93,7 @@ def upload_post_to_instagram(description, image_path):
     sized_image_path = get_sized_image_path(image_path)
     hashtagList = "#AIart #neuralart #machinelearningart #digitalart #artificialintelligence #techart #dataart #proceduralart #generativeart #cyberpunkart"
     cl = Client()
-    cl.login(config_vars['INSTAGRAM_USER'], config_vars['INSTAGRAM_PASSWORD'])
+    cl.login(os.environ.get("INSTAGRAM_USER"), os.environ.get("INSTAGRAM_PASSWORD"))
     cl.photo_upload(sized_image_path, description+'\n.\n.\n.\n'+hashtagList)
     print("Posted.")
 
@@ -109,7 +109,7 @@ def save_post_data(post_prompt, backstory, img_url):
     return open_ai.download_image("posts/" + date_to_be_saved+"/", date_to_be_saved, img_url)
 
 open_ai = OpenAi()
-bot = telebot.TeleBot(config_vars['BOT_TOKEN'])
+bot = telebot.TeleBot(os.environ.get("BOT_TOKEN"))
 answer = Answer.NOT_ANSWERED
 
 @bot.message_handler(commands = ['start'])
@@ -119,27 +119,27 @@ def send_information(message):
 @bot.message_handler(commands = ['work'])
 def work(message):
     print(message.chat.id)
-    bot.send_message(config_vars["OUR_CHAT_ID"], "working!")
+    bot.send_message(os.environ.get("OUR_CHAT_ID"), "working!")
     generate_post()
 
 @bot.message_handler(commands = ['accept'])
 def authorize_post_upload(message):
     global answer
-    bot.send_message(config_vars["OUR_CHAT_ID"], "Post Approved!")
+    bot.send_message(os.environ.get("OUR_CHAT_ID"), "Post Approved!")
     print("Post Approved!")
     answer = Answer.APPROVED
 
 @bot.message_handler(commands = ['reject'])
 def reject_post_upload(message):
     global answer
-    bot.send_message(config_vars["OUR_CHAT_ID"], "Post Rejected. Sending another one...")
+    bot.send_message(os.environ.get("OUR_CHAT_ID"), "Post Rejected. Sending another one...")
     print("Post Rejected. Sending another one...")
     answer = Answer.REJECTED
 
 def send_possible_post(image_url, backstory):
     print("Sending post...")
-    bot.send_photo(config_vars["OUR_CHAT_ID"], image_url)
-    bot.send_message(config_vars["OUR_CHAT_ID"], backstory)
+    bot.send_photo(os.environ.get("OUR_CHAT_ID"), image_url)
+    bot.send_message(os.environ.get("OUR_CHAT_ID"), backstory)
 
 def generate_post():
     character_prompt = open_ai.get_character_prompt()
