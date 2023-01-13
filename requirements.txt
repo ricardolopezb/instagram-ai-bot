@@ -80,5 +80,6 @@ tzdata==2022.7
 tzlocal==4.2
 urllib3==1.26.13
 webdriverdownloader==1.1.0.3
+openai==0.26.0
 wsproto==1.2.0
 yarl==1.8.2
